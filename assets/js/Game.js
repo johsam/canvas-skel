@@ -1,4 +1,4 @@
-//@ts-check
+// @ts-check
 
 export default class Game {
     /**
@@ -15,11 +15,12 @@ export default class Game {
      * @param {KeyboardEvent} _event
      */
     keyDown = (keys, _event) => {
+        // eslint-disable-next-line sonarjs/no-unused-collection
         const down = [];
         keys.map((key, index) => {
             if (key) down.push(index);
         });
-        //console.log(down);
+        // console.log(down);
     };
 
     /**
@@ -27,7 +28,7 @@ export default class Game {
      * @param {KeyboardEvent} _event
      */
     keyUp = (_keys, _event) => {
-        //console.log(keys);
+        // console.log(keys);
     };
 
     /**
@@ -35,7 +36,7 @@ export default class Game {
      * @param {MouseEvent} _event
      */
     mouseDown = (_pos, _event) => {
-        //console.log(pos);
+        // console.log(pos);
     };
 
     /**
@@ -48,7 +49,7 @@ export default class Game {
         // console.log(deltaTime,frameCounter);
 
         this.currentAngle += ((deltaTime / 60) * Math.PI) / 180;
-        this.currentAngle %= 2* Math.PI;
+        this.currentAngle %= 2 * Math.PI;
 
         const ctx = this.ctx;
 
@@ -67,7 +68,7 @@ export default class Game {
         let txt = `${width}x${height}`;
         ctx.fillText(txt, 10, 10);
 
-        txt = (1000.0 / (deltaTime === 0 ? 1000.0 : deltaTime)).toFixed(1);
+        txt = (1000 / (deltaTime === 0 ? 1000 : deltaTime)).toFixed(1);
         ctx.fillText(txt, width - 50, 10);
 
         txt = frameCounter.toFixed(0);
@@ -101,7 +102,7 @@ export default class Game {
         }
 
         const scaled = width * 0.4;
-    
+
         const nx = scaled * Math.cos(this.currentAngle);
         const ny = scaled * Math.sin(this.currentAngle);
 

@@ -1,12 +1,12 @@
-//@ts-check
+// @ts-check
 
 /**
  * Is mouse helper
  * @param {Event} event
  */
-const isMouse = (event) => event.type === 'mousedown' || event.type === 'mouseup' || event.type == 'mousemove';
+const isMouse = (event) => event.type === 'mousedown' || event.type === 'mouseup' || event.type === 'mousemove';
 
-export default class ControlMod {
+export default class InputMgr {
     /**
      * @param {HTMLCanvasElement} canvas
      */
@@ -76,14 +76,14 @@ export default class ControlMod {
     /**
      *
      * @param {string} type
-     * @param {*} arg
+     * @param {*} parameters
      * @param {Event} event
      */
-    callUserHandlers = (type, arg, event) => {
+    callUserHandlers = (type, parameters, event) => {
         let handled = false;
         this.userHandlers[type].forEach((userHandler) => {
             if (!handled) {
-                handled = userHandler.call(this, arg, event) || false;
+                handled = userHandler.call(this, parameters, event) || false;
             }
         });
     };
@@ -94,7 +94,8 @@ export default class ControlMod {
      */
     setKeyHandler = (DOMType) => {
         // @ts-ignore
-        this.win.addEventListener(DOMType, (/**@type KeyboardEvent */ event) => {
+        this.win.addEventListener(DOMType, (/** @type KeyboardEvent */ event) => {
+            // eslint-disable-next-line unicorn/prefer-keyboard-event-key
             this.input.keys[event.keyCode] = event.type === 'keydown';
             this.callUserHandlers(DOMType, this.input.keys, event);
         });
@@ -134,7 +135,7 @@ export default class ControlMod {
 const getCanvasRelativeArray = (event) => {
     const canvas = event.target;
     const bx = canvas.getBoundingClientRect();
-    const arr = [];
+    const result = [];
 
     // mouse event
     if (isMouse(event)) {
@@ -149,17 +150,17 @@ const getCanvasRelativeArray = (event) => {
         ];
     }
     // touch
-    let i = 0;
-    while (i < event.targetTouches.length) {
-        const touch = event.targetTouches[i];
-        arr.push({
+    let index = 0;
+    while (index < event.targetTouches.length) {
+        const touch = event.targetTouches[index];
+        result.push({
             x: touch.clientX - bx.left,
             y: touch.clientY - bx.top,
             e: event,
             bx: bx,
             touch: touch,
         });
-        i += 1;
+        index += 1;
     }
-    return arr;
+    return result;
 };

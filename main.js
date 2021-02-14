@@ -1,8 +1,8 @@
-//@ts-check
+// @ts-check
 
-import ControlMod from './assets/js/lib/ControlMod.js';
 import Engine from './assets/js/lib/Engine.js';
 import Game from './assets/js/Game.js';
+import InputMgr from './assets/js/lib/InputMgr.js';
 
 const KEY_P = 80;
 const KEY_DOT = 190;
@@ -14,15 +14,22 @@ const KEY_SHIFT = 16;
  */
 
 window.addEventListener('DOMContentLoaded', (_event) => {
-    const container = document.getElementById('container');
+    
+    /** @type {HTMLElement} */
+    const container = document.querySelector('#container');
+    
     /** @type {Canvas} */
     // @ts-ignore
-    const canvas = document.getElementById('the-canvas');
+    const canvas = document.querySelector('#the-canvas');
+    
     /** @type {Ctx} */
     const ctx = canvas.getContext('2d');
 
+    /** @type {Engine} */
+    let engine = undefined;
+
     const resizeCanvas = () => {
-        const border = parseInt(window.getComputedStyle(document.documentElement).getPropertyValue('--canvas-border')) || 0;
+        const border = Number.parseInt(window.getComputedStyle(document.documentElement).getPropertyValue('--canvas-border')) || 0;
         let cw = 0 + container.offsetWidth - 2 * border;
         let ch = 0 + container.offsetHeight - 2 * border;
 
@@ -33,16 +40,19 @@ window.addEventListener('DOMContentLoaded', (_event) => {
 
         canvas.height = ch;
         canvas.width = cw;
+
+        if (engine && engine.paused()) {
+            engine.redraw();
+        }
     };
 
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas, false);
 
-    const input = new ControlMod(canvas);
+    const input = new InputMgr(canvas);
     const game = new Game(ctx, input);
 
-    input.add('keydown', (/**@type {boolean[]} */ keys, /**@type {KeyboardEvent} */ event) => {
-        
+    input.add('keydown', (/** @type {boolean[]} */ keys, /** @type {KeyboardEvent} */ event) => {
         if (keys[KEY_P]) {
             if (engine.paused()) {
                 engine.resume();
@@ -55,23 +65,19 @@ window.addEventListener('DOMContentLoaded', (_event) => {
                 engine.step();
                 return true;
             }
-        } else if (keys[KEY_SHIFT]) {
-            if (engine.paused()) {
-                engine.redraw();
-                return true;
-            }
+        } else if (keys[KEY_SHIFT] && engine.paused()) {
+            engine.redraw();
+            return true;
         }
 
         game.keyDown(keys, event);
         return false;
     });
 
-    input.add('keyup', (/**@type {boolean[]} */ keys, /**@type {KeyboardEvent} */ event) => {
-        if (engine.paused()) {
-            if (keys[KEY_SHIFT] === false) {
-                engine.redraw();
-                return true;
-            }
+    input.add('keyup', (/** @type {boolean[]} */ keys, /** @type {KeyboardEvent} */ event) => {
+        if (engine.paused() && keys[KEY_SHIFT] === false) {
+            engine.redraw();
+            return true;
         }
         game.keyUp(keys, event);
     });
@@ -80,7 +86,7 @@ window.addEventListener('DOMContentLoaded', (_event) => {
 
     input.add('pointerStart', game.mouseDown);
 
-    const engine = new Engine(60, (deltaTime, frameCounter) => {
+    engine = new Engine(60, (deltaTime, frameCounter) => {
         game.update(deltaTime, frameCounter);
     });
 

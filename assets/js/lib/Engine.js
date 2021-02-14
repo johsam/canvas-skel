@@ -1,4 +1,4 @@
-//@ts-check
+// @ts-check
 
 export default class Engine {
     /**
@@ -9,7 +9,7 @@ export default class Engine {
     constructor(fps, callback) {
         this.raf = undefined;
         this.fps = fps;
-        this.fpsInterval = 1000.0 / fps;
+        this.fpsInterval = 1000 / fps;
         this.callback = callback;
 
         this.setup();
