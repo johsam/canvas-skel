@@ -1,0 +1,39 @@
+:root {
+    --canvas-border: 1px;
+    --outer-bg-color: #111;
+    --container-bg-color: black;
+    --canvas-border-color: green;
+}
+
+body {
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--outer-bg-color);
+}
+
+#container-wrapper {
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--outer-bg-color);
+}
+
+#container {
+    display: grid;
+    place-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    height: 100vh;
+    width: calc((100vw - 2 * var(--canvas-border)) * 3 / 4);
+    min-width: 50vw;
+    background-color: var(--container-bg-color);
+}
+
+#the-canvas {
+    background-color: black;
+    border: var(--canvas-border) solid var(--canvas-border-color);
+    margin: 0px;
+    padding: 0px;
+}
