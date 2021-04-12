@@ -14,18 +14,20 @@ const KEY_SHIFT = 16;
  */
 
 window.addEventListener('DOMContentLoaded', (_event) => {
-    
     /** @type {HTMLElement} */
+    // @ts-ignore
     const container = document.querySelector('#container');
-    
+
     /** @type {Canvas} */
     // @ts-ignore
     const canvas = document.querySelector('#the-canvas');
-    
+
     /** @type {Ctx} */
+    // @ts-ignore
     const ctx = canvas.getContext('2d');
 
     /** @type {Engine} */
+    // @ts-ignore
     let engine = undefined;
 
     const resizeCanvas = () => {

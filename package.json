@@ -3,13 +3,18 @@
   "version": "1.0.0",
   "main": "main.js",
   "license": "MIT",
+  "scripts": {
+    "eslint": "eslint main.js assets/js || true",
+    "tsc": "./node_modules/.bin/tsc --allowJs --checkJs --noEmit --target es2017 --strictFunctionTypes --strictNullChecks --strictPropertyInitialization --noImplicitReturns assets/js/**/*.js"
+  },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^4.15.0",
-    "@typescript-eslint/parser": "^4.15.0",
-    "eslint": "^7.20.0",
+    "@typescript-eslint/eslint-plugin": "^4.21.0",
+    "@typescript-eslint/parser": "^4.21.0",
+    "eslint": "^7.24.0",
     "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-sonarjs": "^0.5.0",
-    "eslint-plugin-unicorn": "^28.0.0",
-    "typescript": "^4.1.5"
-  }
+    "eslint-plugin-radar": "^0.2.1",
+    "eslint-plugin-unicorn": "^29.0.0",
+    "typescript": "^4.2.4"
+  },
+  "dependencies": {}
 }

@@ -6,12 +6,13 @@ module.exports = {
         es2020: true,
     },
 
+    'ignorePatterns': ['**/unused/*.js'],
+    
     extends: [
         // 'hardcore',
         'eslint:recommended',
-        'plugin:@typescript-eslint/eslint-recommended',
         'plugin:@typescript-eslint/recommended',
-        'plugin:sonarjs/recommended',
+        'plugin:radar/recommended',
         'plugin:unicorn/recommended',
         'plugin:import/recommended',
         // 'airbnb',
@@ -23,7 +24,7 @@ module.exports = {
         ecmaVersion: 2021,
     },
 
-    plugins: ['@typescript-eslint', 'sonarjs', 'unicorn'],
+    plugins: ['@typescript-eslint','unicorn', 'radar'],
     rules: {
         'no-var': 1,
         'prefer-const': 1,
@@ -49,9 +50,10 @@ module.exports = {
 
         '@typescript-eslint/prefer-for-of': 1,
 
-        'import/prefer-default-export': 1,
+        'import/prefer-default-export': 0,
 
-        'sonarjs/cognitive-complexity': 'off',
+        'radar/cognitive-complexity': 'off',
+
         'unicorn/no-array-for-each': 'off',
         'unicorn/filename-case': 'off',
         'unicorn/no-useless-undefined': 'off',
@@ -66,5 +68,6 @@ module.exports = {
                 },
             },
         ],
+
     },
 };
