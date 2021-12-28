@@ -1,5 +1,7 @@
 // @ts-check
 
+import { KEY_SHIFT } from './lib/Engine.js';
+
 export default class Game {
     /**
      * @param {CanvasRenderingContext2D} ctx
@@ -83,7 +85,7 @@ export default class Game {
 
         if (this.input.pointerDown) {
             for (const { x, y } of this.input.pos) {
-                ctx.strokeStyle = this.input.keys[16] ? '#00ff00' : '#ffff00';
+                ctx.strokeStyle = this.input.keys[KEY_SHIFT] ? '#00ff00' : '#ffff00';
 
                 ctx.beginPath();
 
@@ -106,7 +108,7 @@ export default class Game {
         ctx.moveTo(width / 2, height / 2);
         ctx.lineTo(width / 2 + nx, height / 2 + ny);
 
-        if (this.input.keys[16]) {
+        if (this.input.keys[KEY_SHIFT]) {
             ctx.font = '15px arial';
 
             txt = ((this.currentAngle * 180) / Math.PI).toFixed(1);

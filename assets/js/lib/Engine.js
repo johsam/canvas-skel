@@ -1,5 +1,10 @@
 // @ts-check
 
+export const KEY_P = 80;
+export const KEY_DOT = 190;
+export const KEY_SHIFT = 16;
+
+
 export default class Engine {
     /**
      * @param {number} fps
@@ -11,6 +16,12 @@ export default class Engine {
         this.fps = fps;
         this.fpsInterval = 1000 / fps;
         this.callback = callback;
+
+        this.then = 0;
+        this.last = 0;
+        this.frame = 0;
+        this.isPaused = false;
+        this.singleStep = false;
 
         this.setup();
     }

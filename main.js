@@ -1,12 +1,9 @@
 // @ts-check
 
-import Engine from './assets/js/lib/Engine.js';
+import Engine, { KEY_DOT, KEY_P, KEY_SHIFT } from './assets/js/lib/Engine.js';
+
 import Game from './assets/js/Game.js';
 import InputMgr from './assets/js/lib/InputMgr.js';
-
-const KEY_P = 80;
-const KEY_DOT = 190;
-const KEY_SHIFT = 16;
 
 /**
  * @typedef {CanvasRenderingContext2D} Ctx
