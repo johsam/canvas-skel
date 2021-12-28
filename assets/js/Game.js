@@ -15,7 +15,7 @@ export default class Game {
      * @param {KeyboardEvent} _event
      */
     keyDown = (keys, _event) => {
-        // eslint-disable-next-line sonarjs/no-unused-collection
+        // eslint-disable-next-line radar/no-unused-collection
         const down = [];
         keys.map((key, index) => {
             if (key) down.push(index);
@@ -83,11 +83,7 @@ export default class Game {
 
         if (this.input.pointerDown) {
             for (const { x, y } of this.input.pos) {
-                if (this.input.keys[16]) {
-                    ctx.strokeStyle = '#00ff00';
-                } else {
-                    ctx.strokeStyle = '#ffff00';
-                }
+                ctx.strokeStyle = this.input.keys[16] ? '#00ff00' : '#ffff00';
 
                 ctx.beginPath();
 

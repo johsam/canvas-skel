@@ -8,13 +8,13 @@
     "tsc": "./node_modules/.bin/tsc --allowJs --checkJs --noEmit --target es2017 --strictFunctionTypes --strictNullChecks --strictPropertyInitialization --noImplicitReturns assets/js/**/*.js"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^4.21.0",
-    "@typescript-eslint/parser": "^4.21.0",
-    "eslint": "^7.24.0",
-    "eslint-plugin-import": "^2.22.1",
+    "@typescript-eslint/eslint-plugin": "^5.8.1",
+    "@typescript-eslint/parser": "^5.8.1",
+    "eslint": "^8.5.0",
+    "eslint-plugin-import": "^2.25.3",
     "eslint-plugin-radar": "^0.2.1",
-    "eslint-plugin-unicorn": "^29.0.0",
-    "typescript": "^4.2.4"
+    "eslint-plugin-unicorn": "^39.0.0",
+    "typescript": "^4.5.4"
   },
   "dependencies": {}
 }
